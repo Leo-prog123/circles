@@ -5,12 +5,13 @@ from PyQt6 import uic
 from PyQt6.QtCore import QPointF
 from PyQt6.QtGui import QPainter, QColor
 from PyQt6.QtWidgets import QWidget, QApplication, QPushButton, QMainWindow
+from UI import Ui_MainWindow
 
 
-class Example(QMainWindow):
+class Example(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.setWindowTitle('Рисование')
         self.do_paint = False
         self.pushButton.clicked.connect(self.paint)
@@ -28,7 +29,10 @@ class Example(QMainWindow):
         self.update()
 
     def draw_flag(self, qp):
-        qp.setBrush(QColor(255, 255, 0))
+        red = randint(0, 255)
+        green = randint(0, 255)
+        blue = randint(0, 255)
+        qp.setBrush(QColor(red, green, blue))
         r = randint(20, 150)
         x = randint(0, self.width() - r)
         y = randint(0, self.height() - r)
